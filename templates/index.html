@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Django Billing System{% endblock %}
+{% block nav_home %}active{% endblock %}
+{% block content %}
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for pt in bill %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><h5 class="text-muted pt-2">Customer details :</h5></div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title pt-2">Customer name - {{ pt.customer_name.capitalize }}</h5>
+                <p class="card-text mt-4">Phone no. - {{ pt.cosutmer_phone }}</p>
+                <p class="card-text">Item name - {{ pt.product_name }}</p>
+                <p class="card-text">Amount - {{ pt.amount }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'pdf' pt.id %}" target="_blank" class="me-3">Print</a>
+                <a href="{% url 'deleteView' pt.id %}">Delete</a>
+                <p class="text-end text-muted">{{ pt.date }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div><br>
+{% endblock %}
